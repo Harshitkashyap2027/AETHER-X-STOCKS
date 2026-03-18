@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AETHER X STOCKS — AI-Powered Stock Market Simulator</title>
+  <meta name="description" content="Trade real stocks with $100,000 virtual credits. Learn, compete, and grow with AI-powered insights." />
+  <meta name="theme-color" content="#00d4ff" />
+  <link rel="manifest" href="/public/manifest.json" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <!-- Toast container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Main app shell -->
+  <div id="app">
+    <div class="loading-screen">
+      <div class="loading-logo">
+        <span class="gradient-text" style="font-size:2rem;font-weight:900;letter-spacing:-1px;">AETHER X</span>
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK via CDN (v10 compat) — served by Google's hardened CDN -->
+  <script crossorigin="anonymous" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script crossorigin="anonymous" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script crossorigin="anonymous" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <!-- Chart.js for charts -->
+  <script crossorigin="anonymous"
+          integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb"
+          src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <!-- App modules (order matters) -->
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/data.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/state.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components.js"></script>
+  <script src="/js/pages/landing.js"></script>
+  <script src="/js/pages/login.js"></script>
+  <script src="/js/pages/register.js"></script>
+  <script src="/js/pages/dashboard.js"></script>
+  <script src="/js/pages/trading.js"></script>
+  <script src="/js/pages/portfolio.js"></script>
+  <script src="/js/pages/learn.js"></script>
+  <script src="/js/pages/ai.js"></script>
+  <script src="/js/pages/leaderboard.js"></script>
+  <script src="/js/pages/social.js"></script>
+  <script src="/js/router.js"></script>
+</body>
+</html>
