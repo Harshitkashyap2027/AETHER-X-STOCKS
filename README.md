@@ -6,10 +6,9 @@
 
 **AI-Powered Stock Market Learning & Simulation Ecosystem**
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Firebase](https://img.shields.io/badge/Firebase-11-orange?style=flat-square&logo=firebase)](https://firebase.google.com/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Firebase](https://img.shields.io/badge/Firebase-10-orange?style=flat-square&logo=firebase)](https://firebase.google.com/)
+[![Chart.js](https://img.shields.io/badge/Chart.js-4.4-ff6384?style=flat-square&logo=chart.js)](https://www.chartjs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
 Master the stock market **without the risk**. Trade real stocks with virtual money, learn from AI, compete with traders worldwide, and build the skills to invest with confidence.
@@ -27,10 +26,9 @@ Master the stock market **without the risk**. Trade real stocks with virtual mon
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
-- [Environment Configuration](#-environment-configuration)
+- [Firebase Configuration](#-firebase-configuration)
 - [Running the Application](#-running-the-application)
 - [Project Structure](#-project-structure)
-- [Available Scripts](#-available-scripts)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -38,13 +36,15 @@ Master the stock market **without the risk**. Trade real stocks with virtual mon
 
 ## 🌟 Overview
 
-**AETHER X STOCKS** is a full-stack, AI-powered stock market simulation platform designed to help beginners and intermediate traders learn investing without risking real capital. Users receive **$100,000 in virtual credits** upon registration and can:
+**AETHER X STOCKS** is a buildless, static single-page application (SPA) for AI-powered stock market simulation. Designed for beginners and intermediate traders, it lets you learn investing without risking real capital. Users receive **$100,000 in virtual credits** upon registration and can:
 
 - Execute real-time paper trades across popular stocks
 - Get AI-driven analysis and personalized recommendations
 - Follow structured learning paths and earn XP
 - Compete on daily, weekly, and all-time leaderboards
 - Connect with and follow other traders in a social network
+
+Because there is **no build step**, you can run the app by simply serving the repository root with any static file server.
 
 ---
 
@@ -66,37 +66,29 @@ Master the stock market **without the risk**. Trade real stocks with virtual mon
 ## 🛠️ Tech Stack
 
 **Frontend**
-- [Next.js 15](https://nextjs.org/) — React framework with App Router
-- [TypeScript 5.8](https://www.typescriptlang.org/) — Type-safe JavaScript
-- [Tailwind CSS 3.4](https://tailwindcss.com/) — Utility-first CSS framework
-- [Framer Motion](https://www.framer.com/motion/) — Animations and transitions
-- [Recharts](https://recharts.org/) — Composable charting library
-- [Radix UI](https://www.radix-ui.com/) — Accessible headless UI components
-- [Lucide React](https://lucide.dev/) — Icon library
-- [Zustand](https://zustand-demo.pmnd.rs/) — Lightweight state management
+- Vanilla **JavaScript (ES6+)** — no framework or build tooling required
+- Plain **CSS** (`css/styles.css`) — custom design system with CSS variables
+- Hash-based client-side routing (`js/router.js`)
+- [Chart.js 4.4](https://www.chartjs.org/) — interactive charts via CDN
 
 **Backend / Infrastructure**
-- [Firebase 11](https://firebase.google.com/) — Authentication, Firestore database, and Analytics
+- [Firebase 10](https://firebase.google.com/) (compat SDK via CDN) — Authentication, Firestore database, and Analytics
 
 ---
 
 ## ✅ Prerequisites
 
-Ensure you have the following installed before getting started:
+| Tool | Notes |
+|---|---|
+| **Git** | To clone the repository — [git-scm.com](https://git-scm.com/) |
+| **Any static file server** | e.g. VS Code Live Server, `npx serve`, Python's `http.server`, or similar |
+| **Firebase project** | For authentication and database — see [Firebase Configuration](#-firebase-configuration) |
 
-| Tool | Version | Download |
-|---|---|---|
-| **Node.js** | v18.0.0 or later | [nodejs.org](https://nodejs.org/) |
-| **npm** | v9.0.0 or later (bundled with Node.js) | — |
-| **Git** | Latest | [git-scm.com](https://git-scm.com/) |
-
-You will also need a **Firebase project** to provide authentication and database services. See [Environment Configuration](#-environment-configuration) for setup instructions.
+> No Node.js build step is required to run the application.
 
 ---
 
 ## 🚀 Installation
-
-Follow these steps to set up the project locally:
 
 ### 1. Clone the Repository
 
@@ -105,101 +97,76 @@ git clone https://github.com/Harshitkashyap2027/AETHER-X-STOCKS.git
 cd AETHER-X-STOCKS
 ```
 
-### 2. Install Dependencies
+### 2. Configure Firebase
+
+Edit `js/firebase-config.js` and replace the placeholder values with your own Firebase project credentials (see [Firebase Configuration](#-firebase-configuration) for details).
+
+### 3. Serve the App
+
+Serve the project root with any static file server. Examples:
 
 ```bash
-npm install
+# Using the npm serve package
+npx serve .
+
+# Using Python 3
+python3 -m http.server 3000
+
+# Using VS Code Live Server extension
+# Right-click index.html → "Open with Live Server"
 ```
 
-### 3. Configure Environment Variables
-
-Copy the example environment file and fill in your Firebase credentials:
-
-```bash
-cp .env.local.example .env.local
-```
-
-Then open `.env.local` and update each value (see [Environment Configuration](#-environment-configuration) for details).
-
-### 4. Start the Development Server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+Open [http://localhost:3000](http://localhost:3000) (or the port your server reports) in your browser.
 
 ---
 
-## 🔧 Environment Configuration
+## 🔧 Firebase Configuration
 
-The application requires Firebase credentials to enable authentication and database functionality.
+The application requires a Firebase project for authentication and Firestore data storage.
 
 ### Step 1 — Create a Firebase Project
 
 1. Go to the [Firebase Console](https://console.firebase.google.com/) and click **Add Project**.
 2. Enter a project name (e.g., `aether-x-stocks`) and follow the setup wizard.
-3. Once created, navigate to **Project Settings** → **General** → **Your apps**.
+3. Navigate to **Project Settings** → **General** → **Your apps**.
 4. Click **Add app** → **Web** (`</>`), register the app, and copy the config object.
 
 ### Step 2 — Enable Firebase Services
 
-In the Firebase Console, enable the following services:
-
 - **Authentication** → Sign-in method → Enable **Email/Password** and optionally **Google**
 - **Firestore Database** → Create database → Start in **test mode** (update rules before production)
 
-### Step 3 — Populate `.env.local`
+### Step 3 — Update `js/firebase-config.js`
 
-Open your `.env.local` file and replace the placeholder values with your Firebase config:
+Open `js/firebase-config.js` and replace the placeholder values with your Firebase config:
 
-```env
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
+```js
+const firebaseConfig = {
+  apiKey: "your_api_key_here",
+  authDomain: "your_project.firebaseapp.com",
+  projectId: "your_project_id",
+  storageBucket: "your_project.appspot.com",
+  messagingSenderId: "your_sender_id",
+  appId: "your_app_id",
+  measurementId: "your_measurement_id"
+};
 ```
 
-> ⚠️ **Never commit your `.env.local` file to version control.** It is already listed in `.gitignore`.
+> ⚠️ **Never commit real credentials to version control.** Consider using environment-specific config files excluded via `.gitignore`.
 
 ---
 
 ## ▶️ Running the Application
 
-### Development Mode
-
-Runs the app in development mode with hot reloading:
+Because AETHER X STOCKS is a buildless static app, simply serve the repository root:
 
 ```bash
-npm run dev
+npx serve .
 ```
 
-Visit [http://localhost:3000](http://localhost:3000)
+Then open the URL shown in your terminal (e.g. [http://localhost:3000](http://localhost:3000)).
 
-### Production Build
-
-Build an optimized production bundle:
-
-```bash
-npm run build
-```
-
-Start the production server:
-
-```bash
-npm run start
-```
-
-### Linting
-
-Run the Next.js linter to check for code issues:
-
-```bash
-npm run lint
-```
+Navigation is fully hash-based (e.g. `/#/dashboard`, `/#/trading`), so no server-side routing configuration is needed.
 
 ---
 
@@ -207,54 +174,33 @@ npm run lint
 
 ```
 AETHER-X-STOCKS/
-├── app/                        # Next.js App Router
-│   ├── (auth)/                 # Authentication routes
-│   │   ├── login/              # Login page
-│   │   └── register/           # Registration page
-│   ├── (dashboard)/            # Protected dashboard routes
-│   │   ├── ai-assistant/       # AI Trading Assistant
-│   │   ├── dashboard/          # Main dashboard
-│   │   ├── leaderboard/        # Rankings & leaderboards
-│   │   ├── learn/              # Learning modules
-│   │   ├── portfolio/          # User portfolio
-│   │   ├── profile/            # User profile
-│   │   ├── social/             # Social trading network
-│   │   └── trading/            # Paper trading simulator
-│   ├── admin/                  # Admin panel
-│   ├── globals.css             # Global styles
-│   ├── layout.tsx              # Root layout
-│   └── page.tsx                # Landing page
-├── components/                 # Reusable React components
-│   ├── ai/                     # AI assistant components
-│   ├── dashboard/              # Dashboard widgets
-│   ├── layout/                 # Layout components (sidebar, navbar)
-│   ├── learn/                  # Learning module components
-│   ├── trading/                # Trading UI components
-│   └── ui/                     # Shared UI primitives (buttons, modals, etc.)
-├── lib/                        # Utility libraries
-│   ├── constants.ts            # App-wide constants
-│   ├── firebase.ts             # Firebase initialization
-│   └── utils.ts                # Helper utilities
-├── store/                      # Zustand state management
-├── types/                      # TypeScript type definitions
-├── public/                     # Static assets
-├── .env.local.example          # Example environment variables
-├── next.config.js              # Next.js configuration
-├── tailwind.config.ts          # Tailwind CSS configuration
-├── tsconfig.json               # TypeScript configuration
-└── package.json                # Project dependencies & scripts
+├── index.html                  # App entry point — loads all scripts in order
+├── css/
+│   └── styles.css              # Global styles & CSS design system
+├── js/
+│   ├── firebase-config.js      # Firebase project credentials & initialization
+│   ├── data.js                 # Static stock data and constants
+│   ├── utils.js                # Helper utilities (formatting, escaping, etc.)
+│   ├── state.js                # Global reactive state management
+│   ├── auth.js                 # Firebase Authentication logic
+│   ├── components.js           # Reusable UI component renderers
+│   ├── router.js               # Hash-based client-side router
+│   └── pages/                  # Page renderer functions
+│       ├── landing.js          # Landing / home page
+│       ├── login.js            # Sign-in page
+│       ├── register.js         # Registration page
+│       ├── dashboard.js        # Main dashboard
+│       ├── trading.js          # Paper trading simulator
+│       ├── portfolio.js        # User portfolio
+│       ├── learn.js            # Learning modules
+│       ├── ai.js               # AI Trading Assistant
+│       ├── leaderboard.js      # Rankings & leaderboards
+│       └── social.js           # Social trading network
+├── public/
+│   └── manifest.json           # PWA manifest
+├── .env.local.example          # Reference — shows expected Firebase keys
+└── package.json                # Metadata only (no build step required)
 ```
-
----
-
-## 📜 Available Scripts
-
-| Script | Command | Description |
-|---|---|---|
-| Dev server | `npm run dev` | Start development server on port 3000 |
-| Build | `npm run build` | Create optimized production build |
-| Start | `npm run start` | Start production server |
-| Lint | `npm run lint` | Run ESLint code checks |
 
 ---
 
@@ -267,8 +213,6 @@ Contributions are welcome! Please follow these steps:
 3. **Commit** your changes: `git commit -m 'feat: add your feature'`
 4. **Push** to the branch: `git push origin feature/your-feature-name`
 5. **Open** a Pull Request
-
-Please make sure your code passes linting (`npm run lint`) before submitting.
 
 ---
 
